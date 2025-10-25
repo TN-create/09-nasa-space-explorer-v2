@@ -5,10 +5,24 @@
   padding: 0;
 }
 
+/* NASA brand variables (colors) */
+:root {
+  /* NASA Blue and Red based on NASA brand guidelines */
+  --nasa-blue: #0B3D91;
+  --nasa-blue-dark: #093272;
+  --nasa-red: #FC3D21;
+  --text: #212121;
+  --bg: #f1f1f1;
+  --card: #ffffff;
+  --border: #e0e0e0;
+}
+
 /* Base page styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f1f1f1;
+  /* Use Public Sans for body text (USWDS/NASA web style), fallbacks included */
+  font-family: 'Public Sans', Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
   padding: 20px;
 }
 
@@ -29,9 +43,10 @@ body {
 }
 
 h1 {
-  font-family: Verdana, sans-serif;
-  font-weight: bold;
-  color: #212121;
+  /* Use Barlow Condensed for headings to match NASA web tone */
+  font-family: 'Barlow Condensed', Verdana, sans-serif;
+  font-weight: 700;
+  color: var(--nasa-blue);
 }
 
 /* Logo */
@@ -57,21 +72,33 @@ button {
   font-weight: normal;
   color: #666;
   padding: 10px 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 4px;
   font-size: 16px;
   line-height: 1.4;
   width: 100%;
 }
 
+/* Input focus states for accessibility */
+input[type="date"]:focus {
+  outline: 3px solid var(--nasa-red);
+  outline-offset: 2px;
+  border-color: var(--nasa-blue);
+}
+
 /* Button specific */
 button {
-  background-color: #d3d3d3;
-  color: black;
+  background-color: var(--nasa-blue);
+  border-color: var(--nasa-blue);
+  color: #fff;
   cursor: pointer;
 }
 button:hover {
-  background-color: #bfbfbf;
+  background-color: var(--nasa-blue-dark);
+}
+button:focus {
+  outline: 3px solid var(--nasa-red);
+  outline-offset: 2px;
 }
 
 /* Stack horizontally on wider screens */
@@ -101,13 +128,15 @@ button:hover {
   flex: 1 1 100%;  /* full width by default */
   min-width: 280px;
   max-width: 500px;
-  background: white;
+  background: var(--card);
   padding: 10px;
+  border-top: 4px solid var(--nasa-blue); /* subtle NASA accent */
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  cursor: pointer;  /* Make gallery cards feel clickable */
 }
 
 /* Three columns on wider screens */
@@ -129,6 +158,9 @@ button:hover {
   padding: 5px;
   font-size: 14px;
 }
+.gallery-item p strong {
+  color: var(--nasa-blue);
+}
 
 /* Placeholder content */
 .placeholder {
@@ -139,6 +171,70 @@ button:hover {
 }
 
 .placeholder-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
+  /* ...existing code... */
+  color: var(--nasa-blue);
+}
+
+/* Modal overlay and content */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+.modal.open {
+  display: flex;              /* show when open */
+}
+.modal-content {
+  background: var(--card);
+  color: var(--text);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  padding: 15px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.modal-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.modal-text h2 {
+  /* ...existing code... */
+  color: var(--nasa-blue);
+}
+.modal-text p {
+  font-size: 14px;
+  color: #444;
+}
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: var(--nasa-blue);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close:hover {
+  background: var(--nasa-blue-dark);
+}
+.modal-close:focus {
+  outline: 3px solid var(--nasa-red);
+  outline-offset: 2px;
 }
